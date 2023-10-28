@@ -142,5 +142,16 @@ public class Movie implements Serializable{
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	
 	
 }
