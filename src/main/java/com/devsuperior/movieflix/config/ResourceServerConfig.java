@@ -8,6 +8,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableResourceServer
@@ -16,8 +18,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	@Autowired
 	private Environment environment;
 	
-	private static final String[] PUBLIC = {"/h2-console/**"};
+	@Autowired
+	private JwtTokenStore tokenStore;
+	
+	private static final String[] PUBLIC = {"/oauth/token","/h2-console/**"};
 
+	/**
+	 * Configurando as rotas e autorizações de acessos.
+	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception{
 		
@@ -27,4 +35,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		
 		http.authorizeRequests().antMatchers(PUBLIC).permitAll();
 	}
+	
+	/**
+	 * Configuração para decodificar o token e analisar se o token esta batendo com o secret, 
+	 * se está expirado, etc, e ter condições de saber se o token é válido 
+	 */
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception{
+		resources.tokenStore(tokenStore);
+	}
+	
 }

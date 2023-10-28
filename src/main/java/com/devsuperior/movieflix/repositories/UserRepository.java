@@ -5,4 +5,6 @@ import com.devsuperior.movieflix.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
+	User findByEmail(String username);
+
 }

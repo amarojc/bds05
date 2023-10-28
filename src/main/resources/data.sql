@@ -1,5 +1,5 @@
-INSERT INTO tb_user (name, email, password, created_At) VALUES ('Bob','bob@gmail.com', '123456', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
-INSERT INTO tb_user (name, email, password, created_At) VALUES ('Ana','ana@gmail.com', '123456', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
+INSERT INTO tb_user (name, email, password, created_At) VALUES ('Bob','bob@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
+INSERT INTO tb_user (name, email, password, created_At) VALUES ('Ana','ana@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
 
 INSERT INTO tb_role (authority, created_At) VALUES ('ROLE_VISITOR', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
 INSERT INTO tb_role (authority, created_At) VALUES ('ROLE_MEMBER', TIMESTAMP WITH TIME ZONE '2023-10-23T18:23:07.12345Z');
