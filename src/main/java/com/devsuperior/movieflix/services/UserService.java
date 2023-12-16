@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.movieflix.dtos.UserDTO;
+import com.devsuperior.movieflix.dtos.UserRoleDTO;
 import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.UserRepository;
 
@@ -25,11 +25,11 @@ public class UserService implements UserDetailsService{
 	private AuthService authService;
 	
 	@Transactional(readOnly = true)
-	public UserDTO findByProfileUserLogged() {
+	public UserRoleDTO findByProfileUserLogged() {
 	
 		User user = authService.authenticated();
 		
-		return new UserDTO(user);
+		return new UserRoleDTO(user);
 	}
 	
 	@Override
