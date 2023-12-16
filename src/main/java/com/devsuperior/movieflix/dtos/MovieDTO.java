@@ -1,10 +1,13 @@
 package com.devsuperior.movieflix.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
 
 public class MovieDTO implements Serializable{
 
@@ -16,35 +19,41 @@ public class MovieDTO implements Serializable{
 	@NotBlank(message = "Campo obrigatório!")
 	private String title;
 	private String subTitle;
-	private String synopsis;
 	private Integer year;
-	private String imgUrl;
-	private Long genreId;
+	private String imgUrl;	
+	private String synopsis;
+	private GenreDTO genre;
+
+	List<ReviewDTO> reviews = new ArrayList<>(); 
 	
 	public MovieDTO() {
 	}
 
-	public MovieDTO(Long id, String title, String subTitle, String synopsis, Integer year, String imgUrl, Long genreId) {
+	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
-		this.synopsis = synopsis;
 		this.year = year;
 		this.imgUrl = imgUrl;
-		this.genreId = genreId;
+	}
+	
+	public MovieDTO(Movie movie, List<Review> reviews) {
+		this(movie);
+		reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
 	}
 	
 	public MovieDTO(Movie movie) {
 		id = movie.getId();
 		title = movie.getTitle();
 		subTitle = movie.getSubTitle();
-		synopsis = movie.getSynopsis();
 		year = movie.getYear();
 		imgUrl = movie.getImgUrl();
-		genreId = movie.getGenre().getId();
+		synopsis = movie.getSynopsis();
+		genre = new GenreDTO(movie.getGenre());
 	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -93,13 +102,20 @@ public class MovieDTO implements Serializable{
 		this.imgUrl = imgUrl;
 	}
 
-	public Long getGenreId() {
-		return genreId;
+	public GenreDTO getGenre() {
+		return genre;
 	}
 
-	public void setGenreId(Long genreId) {
-		this.genreId = genreId;
+	public void setGenre(GenreDTO genre) {
+		this.genre = genre;
 	}
-	
+
+	public List<ReviewDTO> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ReviewDTO> reviews) {
+		this.reviews = reviews;
+	}
 	
 }
